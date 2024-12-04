@@ -5,6 +5,22 @@ import './App.css'
 
 
 
+function TodoList({todos}) {
+  console.log(todos);
+  return (
+    <ul>
+      {todos.map((todo, index) => {
+        return <li key={index}>{todo}</li>
+      })}
+    </ul>
+  )
+}
+
+function ClearTodo({setTodos}) {
+  return (
+    <Button variant = "danger m-3" onClick={() => setTodos([])}>Clear All</Button>   
+  )
+}
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -20,15 +36,12 @@ function App() {
       onChange={(event) => setNewTodo(event.target.value)}
       placeholder='Add a new task'/>
       <Button variant="primary" className='ms-3 ' onClick={addTodo}>Add Task</Button>
-      <div>{todos}</div>
+      <ClearTodo setTodos={setTodos}/>
+      <TodoList todos={todos} />      
     </div>
 
   )
 }
-
-
-
-
 export default App
 
 
